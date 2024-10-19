@@ -42,7 +42,6 @@
 - has_many :delivery_item
 - has_many :shipping destination,through::delivery_item
  
-
 ## purchase_information table
 
 | Column         | Type       | Options                                    |
