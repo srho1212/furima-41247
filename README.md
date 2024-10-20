@@ -1,79 +1,76 @@
 # DB 設計
 
-## user table
+## users table
 
 | Column             | Type                | Options                   |
 |--------------------|---------------------|---------------------------|
 | nickname           | string              | null: false               |
 | email              | string              | null: false ,unique: true |
-| password           | string              | null: false               |
-| re_password        | string              | null: false,unique: true  |
-| family_name        | text                | null: false               |
-| firsty_name        | text                | null: false               |
-| family_name_kana   | text                | null: false               |
-| first_name_kana    | text                | null: false               |
-| birthday           | string              | null: false               |
+| encrypted_password | string              | null: false               |
+| family_name        | string              | null: false               |
+| firsty_name        | string              | null: false               |
+| family_name_kana   | string              | null: false               |
+| first_name_kana    | string              | null: false               |
+| birthday           | date                | null: false               |
 
 ### Association
 
-* has_many_to:item
-* belongs_to:purchase_information
+* has_many :item
+* has_many :purchase_information
  
 
-## item table
+## items table
 
 | Column                              | Type       | Options                                  |
 |-------------------------------------|------------|------------------------------------------|
-| item_name                           |text        |null:false                                |
-| categori                            |text        |null: false                               |
-| status                              |text        |null: false                               |
-| cost                                |text        |null: false                               |
-| delivery_days                       |string      |null:false                                |
+| item_name                           |string      |null:false                                |
+| categori                            |string      |null: false                               |
+| status                              |string      |null: false                               |
+| price                               |string      |null: false                               |
+| days                                |string      |null:false                                |
 | sales_commision                     |text        |null:false                                |
 | sales_profit                        |text        |null:false                                |
 | shipping_prefecture                 |text        |null:false                                |
-| item_image                          |image       |null:false                                |
-| user_id                             | string     |null:false,unique:true,foreign_key:true   |         
+| shipping_destination                |references  |null:false,foreign_key:true               |
+| user                                |references  |null:false,foreign_key:true               |         
 
 
 ### Association
 
 - belongs_to :user
+- extend ActiveHash::Associations::ActiveRecordExtensions
 - has_many :shipping destination
  
  
-## purchase_information table
+## purchase_informations table
 
 | Column         | Type       | Options                                    |
 |----------------|------------|--------------------------------------------|
-| post_code      | string     | null: false                                |
-| item_image     | image      | null: false                                |
-| item_name      | text       | null: false                                |
-| price          | string     | null: false                                |
-| shipping_fee   | string     | null: false                                |
-| user_id        | string     | null:false,unique:true,foreign_key:true    |
+| item           |references  |null:false,foreign_key:true                 |
+| user           |references  |null:false,foreign_key:true                 |         
 
 
 ### Association
 
 - belongs_to :user
 
-## shipping destination table
+## shipping destinations table
 
 | Column                   | Type       | Options                                    |
-|----------------         -|------------|--------------------------------------------|
+|--------------------------|------------|--------------------------------------------|
 | post_code                | string     | null: false                                |
-| prefectures              | text       | null: false                                |
-| municipality             | text       | null: false                                |
-| street_address           | text       | null: false                                |
-| building_name            | text       | null: false                                |
+| shipping_prefecture      | text       |null:false                                  |
+| municipality             | string     | null: false                                |
+| street_address           | string     | null: false                                |
+| building_name            | string     |                                            |
 | telephone                | string     | null: false                                |
-| item_id                  | string     | null:false,unique:true,foreign_key:true    |
+| purchase_information     | references | null:false,foreign_key:true                |
 
 
 
 ### Association
 
 - has_many :item
+- include ActiveHash::Associations
 
 
