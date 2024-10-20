@@ -39,8 +39,7 @@
 ### Association
 
 - belongs_to :user
-- has_many :delivery_item
-- has_many :shipping destination,through::delivery_item
+- has_many :shipping destination
  
  
 ## purchase_information table
@@ -61,31 +60,19 @@
 
 ## shipping destination table
 
-| Column                   | Type       | Options                        |
-|----------------         -|------------|--------------------------------|
-| post_code                | string     | null: false                    |
-| prefectures              | text       | null: false                    |
-| municipality             | text       | null: false                    |  |
-| street_address           | text       | null: false                    |
-| building_name            | text       | null: false                    |
-| telephone                | string     | null: false                    |
-| shipping_destination_id
-
-
-### Association
-
-- has_many :delivery_item
-- has_many :purchase_information,through::delivery_item
-
-## delivery_item table
-
 | Column                   | Type       | Options                                    |
-|--------------------------|------------|--------------------------------------------|
+|----------------         -|------------|--------------------------------------------|
+| post_code                | string     | null: false                                |
+| prefectures              | text       | null: false                                |
+| municipality             | text       | null: false                                |
+| street_address           | text       | null: false                                |
+| building_name            | text       | null: false                                |
+| telephone                | string     | null: false                                |
 | item_id                  | string     | null:false,unique:true,foreign_key:true    |
-| shipping_destination_id  | string     | null:false,unique:true,foreign_key:true    |
 
 
 ### Association
 
-- has_many :shipping destination_id
-- has_many :item_id 
+- has_many :item
+
+
