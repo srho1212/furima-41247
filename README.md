@@ -71,6 +71,7 @@
 | item_id                  | string     | null:false,unique:true,foreign_key:true    |
 
 
+
 ### Association
 
 - has_many :item
