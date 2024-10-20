@@ -15,8 +15,8 @@
 
 ### Association
 
-* has_many :item
-* has_many :purchase_information
+* has_many :items
+* has_many :purchase_informations
  
 
 ## items table
@@ -24,14 +24,13 @@
 | Column                              | Type       | Options                                  |
 |-------------------------------------|------------|------------------------------------------|
 | item_name                           |string      |null:false                                |
-| categori                            |string      |null: false                               |
-| status                              |string      |null: false                               |
-| price                               |string      |null: false                               |
-| days                                |string      |null:false                                |
-| sales_commision                     |text        |null:false                                |
-| sales_profit                        |text        |null:false                                |
-| shipping_prefecture                 |text        |null:false                                |
-| shipping_destination                |references  |null:false,foreign_key:true               |
+| categori_id                         |integer     |null:false                                |
+| status_id                           |integer     |null:false                                |
+| price                               |integer     |null:false                                |
+| delivery_day_id                     |integer     |null:false                                |
+| shipping_prefecture_id              |integer     |null:false                                |
+| shipping_fee                        |integer     |null:false                                |
+| shipping_destination                |references  |null:false                                |
 | user                                |references  |null:false,foreign_key:true               |         
 
 
@@ -39,7 +38,7 @@
 
 - belongs_to :user
 - extend ActiveHash::Associations::ActiveRecordExtensions
-- has_many :shipping destination
+- belongs_to :purchase_information
  
  
 ## purchase_informations table
@@ -53,13 +52,16 @@
 ### Association
 
 - belongs_to :user
+- belongs_to :shipping_destination
+- belongs_to :item
 
-## shipping destinations table
+
+## shipping_destinations table
 
 | Column                   | Type       | Options                                    |
 |--------------------------|------------|--------------------------------------------|
 | post_code                | string     | null: false                                |
-| shipping_prefecture      | text       |null:false                                  |
+| shipping_prefecture_id   |integer     |null:false                                  |
 | municipality             | string     | null: false                                |
 | street_address           | string     | null: false                                |
 | building_name            | string     |                                            |
@@ -70,7 +72,7 @@
 
 ### Association
 
-- has_many :item
+- belongs_to :purchase_information
 - include ActiveHash::Associations
 
 
