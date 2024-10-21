@@ -29,14 +29,14 @@
 | price                               |integer     |null:false                                |
 | delivery_day_id                     |integer     |null:false                                |
 | shipping_prefecture_id              |integer     |null:false                                |
-| shipping_fee                        |integer     |null:false                                |
+| shipping_fee_id                     |integer     |null:false                                |
 | shipping_destination                |references  |null:false                                |
 | user                                |references  |null:false,foreign_key:true               |         
 
 
 ### Association
 
-- belongs_to :user
+- has_many :user
 - extend ActiveHash::Associations::ActiveRecordExtensions
 - belongs_to :purchase_information
  
@@ -52,7 +52,7 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :shipping_destination
+- has_many :shipping_destination
 - belongs_to :item
 
 
