@@ -8,7 +8,7 @@
 | email              | string              | null: false ,unique: true |
 | encrypted_password | string              | null: false               |
 | family_name        | string              | null: false               |
-| firsty_name        | string              | null: false               |
+| first_name         | string              | null: false               |
 | family_name_kana   | string              | null: false               |
 | first_name_kana    | string              | null: false               |
 | birthday           | date                | null: false               |
@@ -39,6 +39,7 @@
 - belongs_to :user
 - extend ActiveHash::Associations::ActiveRecordExtensions
 - has_one :purchase_information
+
  
  
 ## purchase_informations table
