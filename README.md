@@ -24,7 +24,7 @@
 | Column                              | Type       | Options                                   |
 |-------------------------------------|------------|-------------------------------------------|
 | item_name                           |string      |null: false                                |
-| categori_id                         |integer     |null: false                                |
+| category_id                         |integer     |null: false                                |
 | status_id                           |integer     |null: false                                |
 | price                               |integer     |null: false                                |
 | delivery_day_id                     |integer     |null: false                                |
@@ -56,7 +56,7 @@
 - belongs_to :item
 
 
-## shipping_destinations table
+## shipping_destination table
 
 | Column                   | Type       | Options                                    |
 |--------------------------|------------|--------------------------------------------|
