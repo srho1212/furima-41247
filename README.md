@@ -58,7 +58,7 @@
 
 | Column                   | Type       | Options                        |
 |----------------         -|------------|--------------------------------|
-| post_code                | sttring    | null: false                    |
+| post_code                | string     | null: false                    |
 | shipping_prefecture_id   | integer    | null: false                    |
 | municipality             | string     | null: false                    |  
 | street_address           | string     | null: false                    |
