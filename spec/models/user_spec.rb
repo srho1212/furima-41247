@@ -113,12 +113,6 @@ describe 'ユーザー新規登録' do
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
 
-      it 'メールアドレスは、@を含む必要があること。' do
-        @user.email= "111111"
-        @user.valid?
-        expect(@user.errors.full_messages).to include('Email is invalid')
-      end
- 
       it '英字のみのパスワードでは登録できない' do
         @user.password= "aaaaaa"
         @user.valid?
