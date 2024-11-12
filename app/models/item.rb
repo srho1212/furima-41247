@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 
 
 #空の投稿を保存できないようにする
-validates :title, :text, presence: true
+
 
 #ジャンルの選択が「---」の時は保存できないようにする
 validates :category_id, presence: true,numericality: { other_than: 1 , message: "can't be blank"}
@@ -23,6 +23,9 @@ validates :price,presence: true,numericality: { greater_than_or_equal_to: 300, l
 validates :price, format: { with: /\A[0-9]+\z/, message: "は半角数値で入力してください" }
 validates :item_name,presence: true
 validates :item_description,presence: true
+validates :item_image, presence: true
+validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+
 
 
 end
