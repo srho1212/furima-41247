@@ -14,8 +14,8 @@ const price = () => {
               const fee = Math.floor(rawFee); // 手数料を切り捨てる
               const netProfit = inputValue - fee;
 
-              addTaxDom.innerHTML = `販売手数料 (切り捨て): ${fee.toFixed(2)}円`;
-              profitDom.innerHTML = `${netProfit.toFixed(2)}円`; // 利益を更新
+              addTaxDom.innerHTML = ` ${fee.toFixed()}`;
+              profitDom.innerHTML = `${netProfit.toFixed()}`; // 利益を更新
           } else {
               addTaxDom.innerHTML = "有効な金額を入力してください。";
               profitDom.innerHTML = "";
