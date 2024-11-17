@@ -12,7 +12,6 @@ RSpec.describe Item, type: :model do
       end
     end
 
-
     context '出品登録できないとき' do
       it '商品名が空では登録できない' do
         @item.item_name = ''
@@ -24,6 +23,36 @@ RSpec.describe Item, type: :model do
         @item.item_description = ''
         @item.valid?
         expect(@item.errors.full_messages).to include "Item description can't be blank"
+      end
+
+      it "カテゴリーが'---'では登録できない" do
+        @item.category_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be '---'")
+      end
+
+      it "ステータスが '---' では登録できない" do
+        @item.status_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status can't be '---'")
+      end
+
+      it "配送料が '---' では登録できない" do
+        @item.shipping_fee_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee can't be '---'")
+      end
+
+      it "配送地域が '---' では登録できない" do
+        @item.shipping_prefecture_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping prefecture can't be '---'")
+      end
+
+      it "配送日数が '---'では登録できない" do
+        @item.delivery_day_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery day can't be '---'")
       end
 
       it 'カテゴリーが空では登録できない' do
@@ -68,16 +97,28 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include "Price must be greater than or equal to 300"
       end
 
+      it "価格の上限を超えた場合保存できない" do
+        @item.price = 10_000_001
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Price must be less than or equal to 9999999"
+      end
+
       it '価格は半角数のみ保存が入力可能' do
         @item.price = '１０００'
         @item.valid?
         expect(@item.errors.full_messages).to include "Price is not a number"
       end
 
+      it "ItemはUserに属している必要がある" do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "User must exist"
+      end
+
       it '商品画像をつけることが必須' do
         @item.image = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include "Image can't be blank"
       end
     end
   end

@@ -5,14 +5,11 @@ class ItemsController < ApplicationController
     @items = Item.all
   end
 
-  def show
-    @item = Item.find(params[:id])
-  end
+  #def show
+   # @item = Item.find(params[:id])
+  #end
 
   def new
-    unless user_signed_in?
-      redirect_to new_user_session_path, alert: "You need to log in to create an item."
-    end
     @item = Item.new
   end
 
