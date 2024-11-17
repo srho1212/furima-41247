@@ -1,8 +1,17 @@
-<% if @item.errors.any? %>
+<% if defined?(@item) && @item.errors.any? %>
   <div class="error-alert">
     <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
     <ul>
       <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% elsif defined?(resource) && resource.errors.any? %>
+  <div class="error-alert">
+    <h2><%= pluralize(resource.errors.count, "error") %> prohibited this from being saved:</h2>
+    <ul>
+      <% resource.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>
