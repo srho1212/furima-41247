@@ -17,12 +17,11 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user = current_user
 
-    Rails.logger.debug "Current user: #{current_user.inspect}"
+    
 
     if @item.save
       redirect_to @item, notice: 'Item was successfully created.'
     else
-      Rails.logger.debug @item.errors.full_messages
       render :new,status: :unprocessable_entity
     end
   end
