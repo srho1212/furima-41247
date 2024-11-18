@@ -9,7 +9,7 @@ const price = () => {
             if (!isNaN(inputValue)) {
                 const feeRate = 0.1;
                 const fee = Math.floor(inputValue * feeRate);
-                const netProfit = inputValue - fee;
+                const netProfit = Math.floor(inputValue - fee); 
 
                 addTaxDom.innerHTML = fee.toLocaleString();
                 profitDom.innerHTML = netProfit.toLocaleString();
