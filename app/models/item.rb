@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :delivery_day
   belongs_to_active_hash :shipping_prefecture
   belongs_to_active_hash :shipping_fee
+  has_one :purchase_information
 
   # ジャンルの選択が「---」の時は保存できないようにする  
   validates :category_id, numericality: { other_than: 0, message: "can't be '---'" }
