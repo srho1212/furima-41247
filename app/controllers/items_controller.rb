@@ -5,9 +5,16 @@ class ItemsController < ApplicationController
     @items = Item.order(created_at: :desc)
   end
 
-  #def show
-   # @item = Item.find(params[:id])
-  #end
+  def show
+    @item = Item.find(params[:id])
+    @user = @item.user # 出品者の情報を@userに格納
+    @category = @item.category.name # カテゴリー情報を取得
+    @status = @item.status.name # 商品の状態情報を取得
+    @shipping_fee = @item.shipping_fee.name # 配送料情報を取得
+    @shipping_prefecture = @item.shipping_prefecture.name # 配送料情報を
+    @delivery_day = @item.delivery_day.name # 配送料情報を
+    @item_price = @item.price # 配送料情報を
+  end
 
   def new
     @item = Item.new
