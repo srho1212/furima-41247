@@ -33,6 +33,6 @@ class Item < ApplicationRecord
   validates :price, format: { with: /\A[0-9]+\z/, message: "は半角数値で入力してください" }
 
 
-  # 'status_id'が1の場合を"販売中"とみなす例
+  
 end
 

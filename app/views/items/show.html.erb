@@ -33,38 +33,38 @@
       <% end %>
     <% end %>
 
-    <div class="item-explain-box">
+     <div class="item-explain-box">
       <span><%= "商品説明" %></span>
-    </div>
+       <span><%= @item.item_description %></span>
 
     <table class="detail-table">
-      <tbody>
-        <tr>
-          <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @user.nickname %></td>
-        </tr>
-        <tr>
-          <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @category %></td> <!-- カテゴリー名を表示 -->
-        </tr>
-        <tr>
-          <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= @status %></td> <!-- 商品の状態を表示 -->
-        </tr>
-        <tr>
-          <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @shipping_fee %></td> <!-- 配送料の負担を表示 -->
-        </tr>
-        <tr>
-          <th class="detail-item">配送元の地域</th>
-          <td class="detail-value"><%= @shipping_prefecture%></td> <!-- 配送元の地域を表示 -->
-        </tr>
-        <tr>
-          <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= @delivery_day%></td> <!-- 発送日を表示 -->
-        </tr>
-      </tbody>
-    </table>
+  <tbody>
+    <tr>
+      <th class="detail-item">出品者</th>
+      <td class="detail-value"><%= @item.user.nickname %></td>
+    </tr>
+    <tr>
+      <th class="detail-item">カテゴリー</th>
+      <td class="detail-value"><%= @item.category.name %></td> <!-- カテゴリー名を表示 -->
+    </tr>
+    <tr>
+      <th class="detail-item">商品の状態</th>
+      <td class="detail-value"><%= @item.status.name %></td> <!-- 商品の状態を表示 -->
+    </tr>
+    <tr>
+      <th class="detail-item">配送料の負担</th>
+      <td class="detail-value"><%= @item.shipping_fee.name %></td> <!-- 配送料の負担を表示 -->
+    </tr>
+    <tr>
+      <th class="detail-item">配送元の地域</th>
+      <td class="detail-value"><%= @item.shipping_prefecture.name %></td> <!-- 配送元の地域を表示 -->
+    </tr>
+    <tr>
+      <th class="detail-item">発送日の目安</th>
+      <td class="detail-value"><%= @item.delivery_day.name %></td> <!-- 発送日を表示 -->
+    </tr>
+  </tbody>
+</table>
 
     <div class="option">
       <div class="favorite-btn">
