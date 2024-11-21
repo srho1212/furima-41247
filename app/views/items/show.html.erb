@@ -17,7 +17,7 @@
         <%= @item.price %>
       </span>
       <span class="item-postage">
-        <%= @shipping_fee %>
+        <%= @item.shipping_fee.name %>
       </span>
     </div>
 
@@ -27,7 +27,7 @@
         <%= link_to "商品の編集", "#", method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
         <%= link_to "削除", "#", data: {turbo_method: :delete}, class:"item-destroy" %>
-      <% else  current_user != @item.user %>
+      <% else %>
         <!-- ログイン状態且つ、現在のユーザーが出品者でない場合で商品が販売中 -->
         <%= link_to "購入画面に進む","#", class: "item-red-btn" %>
       <% end %>
