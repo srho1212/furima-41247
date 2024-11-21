@@ -9,6 +9,9 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipping_fee
   has_one :purchase_information
 
+
+
+
   # ジャンルの選択が「---」の時は保存できないようにする  
   validates :category_id, numericality: { other_than: 0, message: "can't be '---'" }
   validates :status_id, numericality: { other_than: 0, message: "can't be '---'" }
@@ -28,5 +31,8 @@ class Item < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
   validates :price, numericality: { only_integer: true }
   validates :price, format: { with: /\A[0-9]+\z/, message: "は半角数値で入力してください" }
+
+
+  
 end
 

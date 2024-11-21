@@ -127,8 +127,8 @@
   <ul class='item-lists'>
     <% @items.each do |item| %>
       <li class='list'>
-    <%= link_to "#" do %>
-      <%= image_tag url_for(item.image), id: "item-image", class: "item-img" %>
+     <%= link_to item_path(item) do  %>
+       <%= image_tag url_for(item.image), id: "item-image", class: "item-img" %>
            <div class='item-img-content'>
              <%# if item.purchase_information.present? %>
                <!--<div class='sold-out'>
@@ -148,7 +148,7 @@
             </div>
           </div>
         <% end %>
-      </li>
+       </li>
     <% end %>
 
     <% if @items.empty? %>
