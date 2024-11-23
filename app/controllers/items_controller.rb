@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]#, :destroy]
-  before_action :set_item, only: [:edit, :update,:show]#,:destroy]
-  before_action :correct_user, only: [:edit, :update,] #:destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_item, only: [:edit, :update,:show,:destroy]
+  before_action :correct_user, only: [:edit, :update,:destroy]
 
  
   def index
@@ -38,14 +38,13 @@ class ItemsController < ApplicationController
     end
   end
 
-  #def destroy
-    #@item = Item.find(params[:id])
-    #if @item.destroy
-      #redirect_to root_path, notice: 'Item was successfully deleted.'
-   # else
-   #   redirect_to item_path(@item), alert: 'Failed to delete the item.'
-   # end
-  #end
+  def destroy
+    if @item.destroy
+     redirect_to root_path
+   else
+     redirect_to item_path(@item)
+   end
+  end
   
   private
 
