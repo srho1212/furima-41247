@@ -1,5 +1,18 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]#, :destroy]
+  before_action :set_item, only: [:edit, :update]#,:destroy]
+  before_action :correct_user, only: [:edit, :update,] #:destroy]
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def correct_user
+    unless @item.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
+
 
   def index
     @items = Item.order(created_at: :desc)
@@ -17,8 +30,6 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     @item.user = current_user
 
-    
-
     if @item.save
       redirect_to @item, notice: 'Item was successfully created.'
     else
@@ -26,6 +37,29 @@ class ItemsController < ApplicationController
     end
   end
 
+  def edit
+    @item = Item.find(params[:id])
+    @categories = Category.all.pluck(:name, :id) # カテゴリーの選択肢を配列で用意する
+  end
+
+  def update
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to @item
+    else
+      render :edit,status: :unprocessable_entity
+    end
+  end
+
+  #def destroy
+    #@item = Item.find(params[:id])
+    #if @item.destroy
+      #redirect_to root_path, notice: 'Item was successfully deleted.'
+   # else
+   #   redirect_to item_path(@item), alert: 'Failed to delete the item.'
+   # end
+  #end
+  
   private
 
   def item_params
