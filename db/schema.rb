@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_19_085751) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_27_105223) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,6 +66,25 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_19_085751) do
     t.index ["item_id"], name: "index_purchase_informations_on_item_id"
   end
 
+  create_table "purchases", charset: "utf8", force: :cascade do |t|
+    t.string "information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shippings", charset: "utf8", force: :cascade do |t|
+    t.string "post_code", null: false
+    t.integer "shipping_prefecture_id", null: false
+    t.string "municipality", null: false
+    t.string "street_address", null: false
+    t.string "building_name"
+    t.string "telephone", null: false
+    t.bigint "purchase_information_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_information_id"], name: "index_shippings_on_purchase_information_id"
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -88,4 +107,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_19_085751) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
   add_foreign_key "purchase_informations", "items"
+  add_foreign_key "shippings", "purchase_informations"
 end

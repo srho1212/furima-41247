@@ -6,6 +6,7 @@ class User < ApplicationRecord
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
 
   has_many :items
+  has_many :purchase_informations
 
   validates :nickname, presence: true
   validates :family_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください' }

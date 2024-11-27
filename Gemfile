@@ -79,6 +79,6 @@ group :production do
 end
 
 gem 'devise'
-gem 'rubocop', require: false
 gem 'faker'
 gem 'active_hash'
+gem 'pry-rails'
