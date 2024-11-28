@@ -53,10 +53,10 @@
 ### Association
 
 - belongs_to :user
-- has_one :shipping_destination
+- has_one :shipping
 - belongs_to :item 
 
-##  ShippingDestination table
+##  Shipping table
 
 | Column                   | Type       | Options                        |
 |----------------         -|------------|--------------------------------|
