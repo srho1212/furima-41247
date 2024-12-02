@@ -3,14 +3,17 @@ class PurchaseInformationsController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
-    @purchase_informations_shipping_destination = PurchaseInformationsShippingDestination.new
+    #@item = Item.find(params[:item_id])
+    @purchase_informationsform = PurchaseInformationsForm.new
   end
 
   def create
-    @purchase_informations_shipping_destination = PurchaseInformationsShippingDestination.new(purchase_informations_params)
-    if @purchase_informations_shipping_destination.save
+    @purchase_informationsform = PurchaseInformationsForm.new(purchase_informations_params)
+    if @purchase_informationsform.valid?
+      @purchase_informationsform.save
       redirect_to root_path
     else
+      @item = Item.find(params[:item_id])
       render :index, status: :unprocessable_entity
     end
   end
@@ -22,6 +25,8 @@ class PurchaseInformationsController < ApplicationController
   end
 
   def purchase_informations_params
-    params.require(:purchase_informations_shipping_destination).permit(:post_code, :shipping_prefecture_id, :municipality, :street_address, :building_name, :telephone).merge(user_id: current_user.id, item_id: @item.id,)
+    params.require(:purchase_informations_form).permit(
+      :post_code, :shipping_prefecture_id, :municipality, :street_address, :building_name, :telephone
+    ).merge(item_id: params[:item_id], user_id: current_user.id)
   end
 end

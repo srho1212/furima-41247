@@ -1,5 +1,7 @@
-class AddUserIdToPurchaseInformations < ActiveRecord::Migration[7.0]
+class AddUserIdToPurchaseInformations < ActiveRecord::Migration[6.1]
   def change
-    add_column :purchase_informations, :user_id, :integer
+    unless column_exists?(:purchase_informations, :user_id)
+      add_column :purchase_informations, :user_id, :integer
+    end
   end
 end
