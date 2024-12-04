@@ -4,6 +4,7 @@ class PurchaseInformationsController < ApplicationController
 
   def index
     #@item = Item.find(params[:item_id])
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase_informationsform = PurchaseInformationsForm.new
   end
 
@@ -15,6 +16,7 @@ class PurchaseInformationsController < ApplicationController
       redirect_to root_path
     else
       @item = Item.find(params[:item_id])
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       render :index, status: :unprocessable_entity
     end
   end
@@ -31,7 +33,7 @@ class PurchaseInformationsController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_ee29726f757bb33bd9c5f5ea"  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
       card: purchase_informations_params[:token],    # カードトークン

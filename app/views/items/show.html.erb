@@ -8,9 +8,11 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag url_for(@item.image), id: "item-image", class: "item-img" %>
-      <div class="sold-out">
-            <!-- <span>Sold Out!!</span> -->
-      </div>
+      <% if @item.purchase_information.present? %>
+        <div class="sold-out">
+         <span>Sold Out!!</span>
+       </div>
+     <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -21,23 +23,23 @@
       </span>
     </div>
 
-    <% if user_signed_in? %>
+    <% if user_signed_in? && @item.purchase_information.blank? %>
       <% if current_user == @item.user %>
         <!-- ログイン状態且つ、現在のユーザーが出品者で商品が販売中 -->
         <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
-        <%= link_to "削除", item_path(@item.id), data: { turbo_method: :delete}, class: "item-destroy" %>
+        <%= link_to "削除", item_path(@item.id), data: { turbo_method: :delete }, class: "item-destroy" %>
       <% else %>
         <!-- ログイン状態且つ、現在のユーザーが出品者でない場合で商品が販売中 -->
-      <%= link_to "購入画面に進む", item_purchase_informations_path(@item), data: { turbo: false }, class: "item-red-btn" %>
+        <%= link_to "購入画面に進む", item_purchase_informations_path(@item), data: { turbo: false }, class: "item-red-btn" %>
       <% end %>
     <% end %>
 
- <div class="item-explain-box">
-   <span><%= @item.item_description %></span>
- </div>
-  <table class="detail-table">
-  <tbody>
+    <div class="item-explain-box">
+     <span><%= @item.item_description %></span>
+   </div>
+   <table class="detail-table">
+   <tbody>
     <tr>
       <th class="detail-item">出品者</th>
       <td class="detail-value"><%= @item.user.nickname %></td>

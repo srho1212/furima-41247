@@ -9,6 +9,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
+    @is_purchased = @item.purchase_information.present?
   end
 
   def new
