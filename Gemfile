@@ -72,6 +72,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  
 end
 
 group :production do
@@ -84,3 +85,4 @@ gem 'active_hash'
 gem 'pry-rails'
 gem 'jquery-rails'
 gem 'rails-ujs'
+gem 'payjp'

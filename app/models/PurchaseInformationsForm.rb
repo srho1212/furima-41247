@@ -20,7 +20,8 @@ class PurchaseInformationsForm
   purchase_information = PurchaseInformation.create(item_id: item_id.to_i, user_id: user_id)
   # 住所を保存する user_id: user_id)
   # 住所を保存する
-  Shipping.create(post_code: post_code, shipping_prefecture_id: shipping_prefecture_id, municipality: municipality, street_address: street_address, building_name: building_name, purchase_information_id: purchase_information.id)
+  Shipping.create(post_code: post_code, shipping_prefecture_id: shipping_prefecture_id, municipality: municipality, street_address: street_address, 
+   building_name: building_name,telephone: telephone, purchase_information_id: purchase_information.id)
 end
   
 
