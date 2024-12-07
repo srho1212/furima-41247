@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_19_085751) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_28_122901) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,11 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_19_085751) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "articles", charset: "utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "items", charset: "utf8", force: :cascade do |t|
     t.string "item_name", default: "", null: false
     t.integer "category_id", null: false
@@ -61,9 +56,30 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_19_085751) do
 
   create_table "purchase_informations", charset: "utf8", force: :cascade do |t|
     t.bigint "item_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_purchase_informations_on_item_id"
+    t.index ["user_id"], name: "index_purchase_informations_on_user_id"
+  end
+
+  create_table "purchases", charset: "utf8", force: :cascade do |t|
+    t.string "information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shippings", charset: "utf8", force: :cascade do |t|
+    t.string "post_code", null: false
+    t.integer "shipping_prefecture_id", null: false
+    t.string "municipality", null: false
+    t.string "street_address", null: false
+    t.string "building_name"
+    t.string "telephone", null: false
+    t.bigint "purchase_information_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_information_id"], name: "index_shippings_on_purchase_information_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -88,4 +104,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_19_085751) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
   add_foreign_key "purchase_informations", "items"
+  add_foreign_key "purchase_informations", "users"
+  add_foreign_key "shippings", "purchase_informations"
 end

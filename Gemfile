@@ -72,6 +72,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  
 end
 
 group :production do
@@ -79,6 +80,10 @@ group :production do
 end
 
 gem 'devise'
-gem 'rubocop', require: false
 gem 'faker'
 gem 'active_hash'
+gem 'pry-rails'
+gem 'jquery-rails'
+gem 'rails-ujs'
+gem 'payjp'
+gem 'gon'

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
 
-  resources :items
-
+  resources :items do
+   resources :purchase_informations,only: [:index, :create]
+  end
 end

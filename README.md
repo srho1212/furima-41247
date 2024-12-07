@@ -53,10 +53,10 @@
 ### Association
 
 - belongs_to :user
-- has_one :shipping_destination
+- has_one :shipping
 - belongs_to :item 
 
-## shipping destination table
+##  Shipping table
 
 | Column                   | Type       | Options                        |
 |----------------         -|------------|--------------------------------|
@@ -68,11 +68,8 @@
 | telephone                | string     | null: false                    |
 | purchase_information     | references | null: false,foreign_key:true   |            | 
 
-- belongs_to :item
 
 ### Association
 
 - belongs_to :purchase_information
 - include ActiveHash::Associations
-
-
