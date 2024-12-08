@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
     @item.user = current_user
 
     if @item.save
-      redirect_to @item, notice: 'Item was successfully created.'
+      redirect_to root_path, notice: 'Item was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
